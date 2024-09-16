@@ -8,6 +8,26 @@ import sqlalchemy
 
 engine = sqlalchemy.create_engine("sqlite:///../data/database.db")
 
+#%%
+
+# Substitua 'meu_arquivo.csv' pelo nome do seu arquivo
+df = pd.read_csv("../data/customers.csv", sep=";")
+df1 = pd.read_excel("../data/transactions.xlsx")
+df2 = pd.read_parquet("../data/transactions_cart.parquet")
+#%%
+
+df.to_sql('transactions', con=engine, if_exists='replace', index=False)
+df1.to_sql('transactions', con=engine, if_exists='replace', index=False)
+df2.to_sql('transactions_cart', con=engine, if_exists='replace', index=False)
+
+
+#%%
+pd.read_sql_table("customers", engine)
+
+#%%
+df_transactions = pd.read_sql_table("transactions", engine)
+df_transactions
+
 # %%
 
 df_transactions_cart = pd.read_sql_table("transactions_cart", engine)
@@ -52,12 +72,13 @@ df_02 = pd.DataFrame(data_02)
 
 # %%
 
-df_01.to_sql("tb_fodase", engine, index=False)
+df_01.to_sql("tb_fodase", engine, index=False, if_exists="replace")
 
 # %%
 
-df_02.to_sql("tb_fodase", engine, index=False, if_exists="replace")
+df_02.to_sql("tb_fodase", engine, index=False, if_exists="append")
 
 # %%
 
 pd.read_sql("tb_fodase", engine)
+# %%

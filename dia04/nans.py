@@ -30,3 +30,4 @@ df.dropna(subset=["idade", "renda"], how='any')
 
 # %%
 df.dropna(axis=1, thresh=3)
+# %%

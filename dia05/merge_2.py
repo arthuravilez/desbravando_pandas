@@ -25,3 +25,4 @@ df_join = (df_transactions.merge(df_customer,
                                  )
 
 df_join
+# %%

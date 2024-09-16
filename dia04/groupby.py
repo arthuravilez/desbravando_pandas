@@ -65,3 +65,5 @@ def recencia(x):
             "DtTransaction":"UltimaData"
             })
    .reset_index())
+
+# %%

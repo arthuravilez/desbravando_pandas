@@ -5,6 +5,7 @@ import numpy as np
 
 # %%
 df = pd.read_csv("../data/customers.csv", sep=";")
+df
 
 # %%
 
@@ -86,6 +87,9 @@ data = {
 
 df_crm = pd.DataFrame(data)
 
+df_crm
+
+# %%
 def rfv(row):
     
     nota = 0
@@ -120,3 +124,5 @@ df_crm
 # %%
 
 df_crm.iloc[0]
+
+# %%

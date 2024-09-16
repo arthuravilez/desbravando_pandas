@@ -37,3 +37,4 @@ df_transacao.merge(df_user,
                    left_on=['id_user'],
                    right_on=['id'],                   
                    )
+# %%
