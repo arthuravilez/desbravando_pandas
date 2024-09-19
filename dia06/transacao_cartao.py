@@ -1,6 +1,8 @@
 # %%
 import pandas as pd
 import numpy as np
+from datetime import datetime
+
 
 df = pd.read_excel("../data/transacao_cartao.xlsx")
 df
@@ -39,10 +41,11 @@ df_fatura["Months_add"] = (df_fatura.groupby("idTransaction")["dtTransaction"]
                                     .astype(int))
 
 df_fatura
+
 # %%
 
 def add_months(row):
-    new_date = row["dtTransaction"] + np.timedelta64(row['Months_add'], 'M')
+    new_date = row["dtTransaction"] + np.timedelta64(row['Months_add'], 'm') # Depois tentar corrigir esse 'M'
     dt_str = new_date.strftime("%Y-%m")
     return dt_str
 
@@ -54,13 +57,3 @@ df_fatura_mes = (df_fatura.groupby(['idCliente', 'DtFatura'])["ValorParcela"]
                           .sum()
                           .reset_index())
 df_fatura_mes
-# %%
-df_fatura_mes = (df_fatura_mes.pivot_table(columns="DtFatura",
-                                          index="idCliente",
-                                          values="ValorParcela")
-                              .fillna(0)
-                              .reset_index()
-                              )
-
-# %%
-df_fatura_mes.to_excel("Fatura_detalhada.xlsx")
